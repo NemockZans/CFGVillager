@@ -1,0 +1,35 @@
+####################
+# manual
+#===================
+# Here are some examples how to create a Villager
+####################
+
+
+A Villager with 1 trade looks like this:
+
+####################
+# villager 1 trades
+####################
+
+"villager 1 trades" {
+    I:HowManyTrades=1
+    S:trade-0 <
+        0001-1-0
+        0001-0-0
+        0001-1-0
+     >
+}
+
+
+Meanings:
+
+The first block initiates the new Villagers cathegory.
+The first variable named HowManyTrades gives the amount of trades.
+The next variable is named trade-<number of the trade> and is cut into 3 rows with 3 columns.
+ - The first column is the items ID.
+ - The second column is the amount used in the trade.
+ - The last is the damage value.
+
+The first two rows are the cost the last row is the item you purchase.
+Set the second items amount 0 to have no second trade item.
+NEVER set a item ID 0000!!!

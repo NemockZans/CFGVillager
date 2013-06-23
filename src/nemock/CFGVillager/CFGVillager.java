@@ -13,7 +13,7 @@ import net.minecraftforge.common.Configuration;
 
 
 
-@Mod(modid = "CFGVillagers", name = "CFG Villagers", version = "0.0.1")
+@Mod(modid = "CFGVillagers", name = "CFG Villagers", version = "Alpha-0.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class CFGVillager {
 	
@@ -23,6 +23,8 @@ public class CFGVillager {
 	//the package of trades the villagers have
 	private String trades[][][];
 	
+	private int idBase;
+	
 	@PreInit
 	public void preInit(FMLPreInitializationEvent event) {
 
@@ -31,18 +33,26 @@ public class CFGVillager {
 		
 		config.load();
 		
+		//comment in config file
+		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Read the manual.txt to learn how to add a new villager and new trades to the game (ints in the CFGVillager.zip file).\nidBase starts at 9, set it higher if there are more than 3 other mods adding new Villagers.\namount regulates the amount of new types of villagers you want to add.");
+		
+		//first Villagers id from wich this mods starts adding them
+		idBase = config.get(Configuration.CATEGORY_GENERAL, "idBase", 9).getInt();
+		
 		//amount of new villager types
-		int amount = config.get(Configuration.CATEGORY_GENERAL, "VillagerAmount", 1).getInt();
+		int amount = config.get(Configuration.CATEGORY_GENERAL, "VillagerAmount", 0).getInt();
 		
 		//initiates the trades array
 		this.trades = new String[amount][][];
 		
-		for( int i = 0; i < amount; i++)
+		for( int i = 1; i <= amount; i++)
 		{
+			
 			//the categorys name
 			String category = "Villager " + Integer.toString(i) +" trades";
+			
 			//gives the amount of trades
-			int tradeCount = config.get(category, "HowManyTrades", 0).getInt();
+			int tradeCount = config.get(category, "HowManyTrades", 1).getInt();
 			
 			//default trade value
 			String def[] = {"0001-1-0","0001-0-0","0001-1-0"};
@@ -50,9 +60,10 @@ public class CFGVillager {
 			
 			for(int j = 0; j < tradeCount; j++)
 			{
-				tradePackages [j] = config.get(category, "trade-"+ Integer.toString(j) , def).getStringList();
+				tradePackages [j] = config.get(category, "trade-"+ Integer.toString(j+1) , def).getStringList();
 			}
-			this.trades[i]= tradePackages;			
+			this.trades[i-1]= tradePackages;
+			
 		}
 		
 		this.countVillagers = amount;
@@ -70,8 +81,8 @@ public class CFGVillager {
 		for (int i = 0; i < countVillagers; i++)
 		{
 			//Still need to figure this out
-			String tPath ="/villager_"+ Integer.toString(i+1) +".png";
-			int id = 9+i;
+			String tPath ="/textures/villager_"+ Integer.toString(i+1) +".png";
+			int id = idBase + i;
 			
 			//registers new villager, first id (int) then texture path (String)
 			VillagerRegistry.instance().registerVillagerType( id, tPath);
