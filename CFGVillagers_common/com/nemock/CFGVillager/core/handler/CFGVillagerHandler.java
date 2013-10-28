@@ -1,4 +1,4 @@
-package nemock.CFGVillager;
+package com.nemock.CFGVillager.core.handler;
 
 import java.util.Random;
 import net.minecraft.entity.passive.EntityVillager;
@@ -8,7 +8,8 @@ import net.minecraft.village.MerchantRecipeList;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 
 
-public class CFGVillagerHandler implements IVillageTradeHandler{
+public class CFGVillagerHandler implements IVillageTradeHandler
+{
 
 	private int tradesData[][][];
 	
