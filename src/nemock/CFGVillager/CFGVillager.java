@@ -13,7 +13,7 @@ import net.minecraftforge.common.Configuration;
 
 
 
-@Mod(modid = "CFGVillagers", name = "CFG Villagers", version = "Alpha-0.0.1")
+@Mod(modid = "CFGVillagers", name = "CFG Villagers", version = "Alpha-0.0.1", dependencies = "before:mca")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class CFGVillager {
 	
@@ -86,6 +86,7 @@ public class CFGVillager {
 			
 			//registers new villager, first id (int) then texture path (String)
 			VillagerRegistry.instance().registerVillagerType( id, tPath);
+			VillagerRegistryMCA.registerVillagerType(id);
 			
 			String villagertrades[][] = trades[i];
 			
