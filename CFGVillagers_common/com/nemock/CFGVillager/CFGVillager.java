@@ -39,7 +39,7 @@ public class CFGVillager
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		ConfigurationHandler.preInit(new File(event.getModConfigurationDirectory().getAbsolutePath()+ File.separator + Reference.MOD_ID + File.separator + Reference.MOD_ID + ".cfg"));		
+		ConfigurationHandler.preInit(event.getSuggestedConfigurationFile());		
 	}
 	
 	
