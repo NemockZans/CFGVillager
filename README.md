@@ -1,3 +1,6 @@
+Note: this repository is out of date
+at the moment the developement of CFGVillager is moved to a private repository
+
 CFGVillager
 ===========
 This is a minecraft mod.
